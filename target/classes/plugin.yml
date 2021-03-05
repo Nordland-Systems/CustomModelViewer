@@ -1,0 +1,12 @@
+name: CustomModelViewer
+version: 0.0.1
+main: de.stevenpaw.custommodelviewer.Main
+api-version: 1.16
+prefix: CMV
+authors: [ StevenPaw ]
+description: A Spigot viewer for custom models in Resourcepacks
+website: sp-universe.com
+
+commands:
+  cmv:
+    description: Show Custom Model Viewer
