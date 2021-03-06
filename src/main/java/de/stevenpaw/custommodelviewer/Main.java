@@ -39,6 +39,7 @@ public class Main extends JavaPlugin {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new InvListener(), this);
 
+        Settings.Init();
     }
 
     @Override
