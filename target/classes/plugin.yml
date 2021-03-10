@@ -1,5 +1,5 @@
 name: CustomModelViewer
-version: 0.0.1
+version: 1.0.0
 main: de.stevenpaw.custommodelviewer.Main
 api-version: 1.16
 prefix: CMV

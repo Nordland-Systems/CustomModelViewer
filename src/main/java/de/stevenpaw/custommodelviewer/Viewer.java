@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 
 public class Viewer {
 
@@ -17,13 +18,11 @@ public class Viewer {
         int invSize = 0;
 
         int page = _page;
-        int customID = 0;
 
         inv = Bukkit.createInventory((InventoryHolder)null, 9*5, "§8Custom Model Viewer §7(Page " + (page+1) + ")");
 
         for(int i = page * 27; i < page * 27 + 27; i++) {
-            customID = page * 27 + i;
-            inv.setItem(i - (page * 27), new ItemBuilder(Material.getMaterial(m)).setCustomModelData(customID).setDisplayName(m).setLore("("+customID+")").build());
+            inv.setItem(i - (page * 27), new ItemBuilder(Material.getMaterial(m)).setCustomModelData(i).setDisplayName(m).setLore("("+i+")").build());
         }
 
         for(int i = 0; i < 9; i++) {
