@@ -1,4 +1,4 @@
-package de.stevenpaw.custommodelviewer;
+package de.stevenpaw.cmv;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;

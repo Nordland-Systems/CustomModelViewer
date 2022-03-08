@@ -5,7 +5,7 @@ THIS PLUGIN DOES NOT ADD CUSTOM MODELS! You need a resourcepack for that!
  
 
 ##Dependencies
-Nothing ^^ just Spigot 1.16.5
+Nothing ^^ just Spigot 1.16.5 / 1.18.x (depending on the plugin-version)
 
  
 
