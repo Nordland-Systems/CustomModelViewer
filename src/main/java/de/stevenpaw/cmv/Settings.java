@@ -1,17 +1,16 @@
 package de.stevenpaw.cmv;
 
-import org.bukkit.Bukkit;
-
 public class Settings {
 
-    public static Modes mode;
+    public static Modes MODE;
+    public static boolean NONAME;
 
     /**
      * Initialize the CMV Settings
      */
     public static void Init()
     {
-        mode = Modes.INVMODE;
+        MODE = Modes.INVMODE;
     }
 
     /**
@@ -19,16 +18,16 @@ public class Settings {
      */
     public static void SwitchMode()
     {
-        if(mode == Modes.INVMODE){
-            mode = Modes.HANDMODE;
-        } else if(mode == Modes.HANDMODE){
-            mode = Modes.SECONDHANDMODE;
-        } else if(mode == Modes.SECONDHANDMODE){
-            mode = Modes.HATMODE;
-        } else if(mode == Modes.HATMODE){
-            mode = Modes.DROPMODE;
-        } else if(mode == Modes.DROPMODE){
-            mode = Modes.INVMODE;
+        if(MODE == Modes.INVMODE){
+            MODE = Modes.HANDMODE;
+        } else if(MODE == Modes.HANDMODE){
+            MODE = Modes.SECONDHANDMODE;
+        } else if(MODE == Modes.SECONDHANDMODE){
+            MODE = Modes.HATMODE;
+        } else if(MODE == Modes.HATMODE){
+            MODE = Modes.DROPMODE;
+        } else if(MODE == Modes.DROPMODE){
+            MODE = Modes.INVMODE;
         }
     }
 
@@ -40,19 +39,19 @@ public class Settings {
     {
         switch(modeIn){
             default:
-                mode = Modes.INVMODE;
+                MODE = Modes.INVMODE;
                 break;
             case HANDMODE:
-                mode = Modes.HANDMODE;
+                MODE = Modes.HANDMODE;
                 break;
             case SECONDHANDMODE:
-                mode = Modes.SECONDHANDMODE;
+                MODE = Modes.SECONDHANDMODE;
                 break;
             case HATMODE:
-                mode = Modes.HATMODE;
+                MODE = Modes.HATMODE;
                 break;
             case DROPMODE:
-                mode = Modes.DROPMODE;
+                MODE = Modes.DROPMODE;
                 break;
         }
     }
@@ -61,10 +60,14 @@ public class Settings {
      * Get the current Mode
      */
     public static String GetCurrentMode(){
-        if(mode == null){
+        if(MODE == null){
             return Modes.INVMODE.toString();
         } else{
-            return mode.toString();
+            return MODE.toString();
         }
+    }
+
+    public static void SwitchNoName(){
+        NONAME = !NONAME;
     }
 }

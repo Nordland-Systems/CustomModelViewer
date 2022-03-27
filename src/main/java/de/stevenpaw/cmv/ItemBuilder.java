@@ -1,10 +1,13 @@
 package de.stevenpaw.cmv;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +23,7 @@ public class ItemBuilder {
     //== VARIABLEN ================
     private ItemStack item;
     private ItemMeta itemMeta;
+    public static NamespacedKey IS_INVISIBLE_KEY;
     //-----------------------------
 
 
@@ -58,7 +62,11 @@ public class ItemBuilder {
     public ItemBuilder setLoreFromArray(List<String> lore) {
         itemMeta.setLore(lore);
         return this;
+    }
 
+    public ItemBuilder setInvisible(){
+        itemMeta.getPersistentDataContainer().set(IS_INVISIBLE_KEY, PersistentDataType.BYTE, (byte) 1);
+        return this;
     }
 
     public ItemStack build() {

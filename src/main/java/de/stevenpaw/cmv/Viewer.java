@@ -2,6 +2,7 @@ package de.stevenpaw.cmv;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -16,6 +17,7 @@ public class Viewer {
         Inventory inv;
         int maxpos = 0;
         int invSize = 0;
+        int modeSlot = 40;
 
         int page = _page;
 
@@ -34,8 +36,16 @@ public class Viewer {
         }
 
         inv.setItem(36, new ItemBuilder(Material.getMaterial(m)).setDisplayName("§lSELECTED ITEM").setLore("§f"+m).build());
+        if(Settings.NONAME){
+            inv.setItem(39, new ItemBuilder(Material.NAME_TAG).setDisplayName("§lNAME")
+                    .setLore("§fMinecraft", "§7Items given have standard names", "§o§aClick to change").setCustomModelData(1).build());
+        } else {
+            inv.setItem(39, new ItemBuilder(Material.NAME_TAG).setDisplayName("§lNAME")
+                    .setLore("§fCMV", "§7Items given have custom names", "§o§aClick to change").setCustomModelData(2).build());
+        }
+        inv.setItem(41, new ItemBuilder(Material.ITEM_FRAME).setDisplayName("§7GET INVISIBLE ITEMFRAME").build());
+        inv.setItem(42, new ItemBuilder(Material.GLOW_ITEM_FRAME).setDisplayName("§7GET INVISIBLE ITEMFRAME").setLore("§fGLOWING").build());
 
-        int modeSlot = 40;
         switch (Settings.GetCurrentMode()){
             case "INVMODE":
                 inv.setItem(modeSlot, new ItemBuilder(Material.WHITE_CONCRETE).setDisplayName("§lMODE").setLore("§fInventory","§7Items land in Inventory","§a§oClick to change").build());

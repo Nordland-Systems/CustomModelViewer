@@ -26,11 +26,17 @@ public class CMDcmv implements TabExecutor {
                         Viewer viewer = new Viewer();
                         viewer.openCMV(p, materialName, 0);
                     } else {
-                        p.sendMessage("§cUse §6'/cmv <item> [<page>]' §cor have Item in Hand");
+                        p.sendMessage("§cUse §6'/cmv <item/frame/glowframe> [<page>]' §cor have Item in Hand");
                     }
                 } else if (args.length == 1) {
                     String materialName = args[0].toUpperCase();
-                    if (Material.getMaterial(materialName) == null) {
+                    if(materialName.equalsIgnoreCase("frame")){
+                        GetItemFrame(p,false);
+                        return true;
+                    } else if(materialName.equalsIgnoreCase("glowframe")){
+                        GetItemFrame(p, true);
+                        return true;
+                    } else if (Material.getMaterial(materialName) == null) {
                         p.sendMessage("§cThe material §6" + materialName + "§c doesn't exist!");
                     } else {
                         Viewer viewer = new Viewer();
@@ -78,6 +84,8 @@ public class CMDcmv implements TabExecutor {
             if (args.length == 1) {
                 //<TYP>
                 commands.add("<item>");
+                commands.add("frame");
+                commands.add("glowframe");
                 for (Material m : Material.values()) {
                     String s = m.toString().toLowerCase();
                     commands.add(s);
@@ -104,5 +112,15 @@ public class CMDcmv implements TabExecutor {
             return completions;
         }
         return null;
+    }
+
+    private void GetItemFrame(Player p, boolean glowing){
+        if(p.hasPermission("custommodelviewer.*") || p.hasPermission("custommodelviewer.itemframe")) {
+            if(glowing){
+
+            } else {
+
+            }
+        }
     }
 }
