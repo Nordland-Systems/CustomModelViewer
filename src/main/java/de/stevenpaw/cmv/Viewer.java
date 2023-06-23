@@ -2,11 +2,8 @@ package de.stevenpaw.cmv;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemStack;
 
 public class Viewer {
 
@@ -15,16 +12,16 @@ public class Viewer {
         Player p = _player;
         String m = _material;
         Inventory inv;
-        int maxpos = 0;
-        int invSize = 0;
-        int modeSlot = 40;
+        int itemsPerPage = Settings.itemsperpage;
+        int invSize = itemsPerPage + 2*9;
+        int modeSlot = invSize - 5;
 
         int page = _page;
 
-        inv = Bukkit.createInventory((InventoryHolder)null, 9*5, "§8Custom Model Viewer §7(Page " + (page+1) + ")");
+        inv = Bukkit.createInventory(null, invSize, "§8Custom Model Viewer §7(Page " + (page+1) + ")");
 
-        for(int i = page * 27; i < page * 27 + 27; i++) {
-            inv.setItem(i - (page * 27), new ItemBuilder(Material.getMaterial(m)).setCustomModelData(i).setDisplayName(m).setLore("("+i+")").build());
+        for(int i = page * itemsPerPage; i < page * itemsPerPage + itemsPerPage; i++) {
+            inv.setItem(i - (page * itemsPerPage), new ItemBuilder(Material.getMaterial(m)).setCustomModelData(i).setDisplayName(m).setLore("("+i+")").build());
         }
 
         for(int i = 0; i < 9; i++) {
@@ -32,19 +29,19 @@ public class Viewer {
             if(i == page) {
                 mat = "NETHER_STAR";
             }
-            inv.setItem(i+27, new ItemBuilder(Material.getMaterial(mat)).setDisplayName("Site " + (i+1)).setLore("Switch Page").setAmount(i+1).build());
+            inv.setItem(i+itemsPerPage, new ItemBuilder(Material.getMaterial(mat)).setDisplayName("Site " + (i+1)).setLore("Switch Page").setAmount(i+1).build());
         }
 
-        inv.setItem(36, new ItemBuilder(Material.getMaterial(m)).setDisplayName("§lSELECTED ITEM").setLore("§f"+m).build());
-        if(Settings.NONAME){
-            inv.setItem(39, new ItemBuilder(Material.NAME_TAG).setDisplayName("§lNAME")
-                    .setLore("§fMinecraft", "§7Items given have standard names", "§o§aClick to change").setCustomModelData(1).build());
+        inv.setItem(invSize - 9, new ItemBuilder(Material.getMaterial(m)).setDisplayName("§lSELECTED ITEM").setLore("§f"+m).build());
+        if(!Settings.NONAME){
+            inv.setItem(invSize - 6, new ItemBuilder(Material.NAME_TAG).setDisplayName("§lNAME")
+                    .setLore("§fMinecraft", "§7Items get standard names", "§o§aClick to change").setCustomModelData(1).build());
         } else {
-            inv.setItem(39, new ItemBuilder(Material.NAME_TAG).setDisplayName("§lNAME")
-                    .setLore("§fCMV", "§7Items given have custom names", "§o§aClick to change").setCustomModelData(2).build());
+            inv.setItem(invSize - 6, new ItemBuilder(Material.NAME_TAG).setDisplayName("§lNAME")
+                    .setLore("§fCMV", "§7Items get custom names", "§o§aClick to change").setCustomModelData(2).build());
         }
-        inv.setItem(41, new ItemBuilder(Material.ITEM_FRAME).setDisplayName("§7GET INVISIBLE ITEMFRAME").build());
-        inv.setItem(42, new ItemBuilder(Material.GLOW_ITEM_FRAME).setDisplayName("§7GET INVISIBLE ITEMFRAME").setLore("§fGLOWING").build());
+        inv.setItem(invSize - 2, new ItemBuilder(Material.ITEM_FRAME).setDisplayName("§7GET INVISIBLE ITEMFRAME").build());
+        inv.setItem(invSize - 1, new ItemBuilder(Material.GLOW_ITEM_FRAME).setDisplayName("§7GET INVISIBLE ITEMFRAME").setLore("§fGLOWING").build());
 
         switch (Settings.GetCurrentMode()){
             case "INVMODE":
@@ -63,8 +60,6 @@ public class Viewer {
                 inv.setItem(modeSlot, new ItemBuilder(Material.RED_CONCRETE).setDisplayName("§lMODE").setLore("§fDrop","§7Drops the item","§a§oClick to change").build());
                 break;
         }
-
-        inv.setItem(44, new ItemBuilder(Material.BARRIER).setDisplayName("§4CLOSE").build());
 
         p.openInventory(inv);
     }
