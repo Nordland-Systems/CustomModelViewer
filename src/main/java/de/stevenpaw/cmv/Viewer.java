@@ -24,13 +24,21 @@ public class Viewer {
             inv.setItem(i - (page * itemsPerPage), new ItemBuilder(Material.getMaterial(m)).setCustomModelData(i).setDisplayName(m).setLore("("+i+")").build());
         }
 
-        for(int i = 0; i < 9; i++) {
+        //Page Selector
+        String mat = "PAPER";
+        if(page > 0) {
+            inv.setItem(itemsPerPage + 3, new ItemBuilder(Material.getMaterial("PAPER")).setDisplayName("Site " + (page)).setLore("Previous Page").setAmount(page).build());
+        }
+        inv.setItem(itemsPerPage + 4, new ItemBuilder(Material.getMaterial("NETHER_STAR")).setDisplayName("Site " + (page + 1)).setLore("Current Page").setAmount(page + 1).build());
+        inv.setItem(itemsPerPage + 5, new ItemBuilder(Material.getMaterial("PAPER")).setDisplayName("Site " + (page + 2)).setLore("Next Page").setAmount(page + 2).build());
+
+        /*for(int i = 0; i < 9; i++) {
             String mat = "PAPER";
             if(i == page) {
                 mat = "NETHER_STAR";
             }
             inv.setItem(i+itemsPerPage, new ItemBuilder(Material.getMaterial(mat)).setDisplayName("Site " + (i+1)).setLore("Switch Page").setAmount(i+1).build());
-        }
+        }*/
 
         inv.setItem(invSize - 9, new ItemBuilder(Material.getMaterial(m)).setDisplayName("§lSELECTED ITEM").setLore("§f"+m).build());
         if(!Settings.NONAME){

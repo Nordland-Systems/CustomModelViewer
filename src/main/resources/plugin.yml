@@ -1,7 +1,7 @@
 name: CustomModelViewer
 version: '${project.version}'
 main: de.stevenpaw.cmv.Main
-api-version: 1.18
+api-version: 1.19
 prefix: CMV
 authors: [ StevenPaw ]
 description: A Spigot viewer for custom models in Resourcepacks
