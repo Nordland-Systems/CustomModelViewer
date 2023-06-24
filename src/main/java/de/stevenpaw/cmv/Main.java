@@ -1,9 +1,9 @@
-package de.stevenpaw.custommodelviewer;
+package de.stevenpaw.cmv;
 
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
 
 public class Main extends JavaPlugin {
 
@@ -38,6 +38,8 @@ public class Main extends JavaPlugin {
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new InvListener(), this);
+
+        ItemBuilder.IS_INVISIBLE_KEY = new NamespacedKey(this, "invisible");
 
         Settings.Init();
     }

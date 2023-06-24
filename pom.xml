@@ -4,19 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.stevenpaw</groupId>
-    <artifactId>custommodelviewer</artifactId>
-    <version>0.0.1</version>
+    <groupId>de.stevenpaw.cmv</groupId>
+    <artifactId>cmv</artifactId>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
 
     <name>CustomModelViewer</name>
 
-    <description>A Spigot viewer for custom models in Resourcepacks</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>sp-universe.com</url>
+    <url>https://github.com/Nordland-Systems/CustomModelViewer</url>
 
     <build>
         <plugins>
@@ -69,7 +68,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <version>1.18.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

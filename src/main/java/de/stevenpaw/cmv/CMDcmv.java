@@ -1,4 +1,4 @@
-package de.stevenpaw.custommodelviewer;
+package de.stevenpaw.cmv;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -26,11 +26,17 @@ public class CMDcmv implements TabExecutor {
                         Viewer viewer = new Viewer();
                         viewer.openCMV(p, materialName, 0);
                     } else {
-                        p.sendMessage("§cUse §6'/cmv <item> [<page>]' §cor have Item in Hand");
+                        p.sendMessage("§cUse §6'/cmv <item/frame/glowframe> [<page>]' §cor have Item in Hand");
                     }
                 } else if (args.length == 1) {
                     String materialName = args[0].toUpperCase();
-                    if (Material.getMaterial(materialName) == null) {
+                    if(materialName.equalsIgnoreCase("frame")){
+                        GetItemFrame(p,false);
+                        return true;
+                    } else if(materialName.equalsIgnoreCase("glowframe")){
+                        GetItemFrame(p, true);
+                        return true;
+                    } else if (Material.getMaterial(materialName) == null) {
                         p.sendMessage("§cThe material §6" + materialName + "§c doesn't exist!");
                     } else {
                         Viewer viewer = new Viewer();
@@ -78,12 +84,14 @@ public class CMDcmv implements TabExecutor {
             if (args.length == 1) {
                 //<TYP>
                 commands.add("<item>");
+                commands.add("frame");
+                commands.add("glowframe");
                 for (Material m : Material.values()) {
                     String s = m.toString().toLowerCase();
                     commands.add(s);
                 }
+                //Collections.sort(commands);
                 StringUtil.copyPartialMatches(args[0], commands, completions);
-                Collections.sort(completions);
             }
 
             if (args.length == 2) {
@@ -104,5 +112,25 @@ public class CMDcmv implements TabExecutor {
             return completions;
         }
         return null;
+    }
+
+    private void GetItemFrame(Player p, boolean glowing){
+        if(p.hasPermission("custommodelviewer.*") || p.hasPermission("custommodelviewer.itemframe")) {
+            if(glowing){
+                if(p.hasPermission("custommodelviewer.*") || p.hasPermission("custommodelviewer.itemframe")) {
+                    //p.getInventory().addItem(new ItemBuilder(Material.GLOW_ITEM_FRAME).setInvisible().build());
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "give " + p.getName() + " glow_item_frame{EntityTag:{Invisible:1b}}");
+                } else {
+                    p.sendMessage("§cYou don't have the permission to get invisible Itemframes");
+                }
+            } else {
+                if(p.hasPermission("custommodelviewer.*") || p.hasPermission("custommodelviewer.itemframe")) {
+                    //p.getInventory().addItem(new ItemBuilder(Material.ITEM_FRAME).setInvisible().build());
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "give " + p.getName() + " item_frame{EntityTag:{Invisible:1b}}");
+                } else {
+                    p.sendMessage("§cYou don't have the permission to get invisible Itemframes");
+                }
+            }
+        }
     }
 }
