@@ -3,12 +3,15 @@ package de.stevenpaw.cmv;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
+
+import java.io.Console;
 
 public class InvListener implements Listener {
 
@@ -20,8 +23,11 @@ public class InvListener implements Listener {
         int itemsPerPage = Settings.itemsperpage;
         int invSize = itemsPerPage + 2*9;
         int modeSlot = invSize - 5;
+        String invTitle = e.getView().getTitle();
+        String cleanedTitle = invTitle.substring(invTitle.length()-4).replaceAll("\\D", "");
+        int page = Integer.parseInt(cleanedTitle);
 
-        Player p = (Player) e.getWhoClicked();
+                Player p = (Player) e.getWhoClicked();
         String InvName = ChatColor.stripColor(e.getView().getTitle());
 
         //Check if correct menu:
@@ -32,9 +38,15 @@ public class InvListener implements Listener {
             return;
         }
 
-        if (e.getSlot() >= itemsPerPage && e.getSlot() < itemsPerPage+9) {
-            //Page-Buttons
-            viewer.openCMV(p, "" + e.getClickedInventory().getItem(0).getType(), e.getSlot() - itemsPerPage);
+        if (e.getSlot() == itemsPerPage + 3) {
+            //Page-Buttons Previous
+            viewer.openCMV(p, "" + e.getClickedInventory().getItem(0).getType(), page - 2);
+            e.setCancelled(true);
+        } else if (e.getSlot() == itemsPerPage + 4) {
+            e.setCancelled(true);
+        } else if (e.getSlot() == itemsPerPage + 5) {
+            //Page-Buttons Next
+            viewer.openCMV(p, "" + e.getClickedInventory().getItem(0).getType(), page);
             e.setCancelled(true);
         } else if (e.getSlot() < itemsPerPage) {
             //Get-Item
