@@ -58,6 +58,8 @@ public class CMDcmv implements TabExecutor {
                 } else {
                     p.sendMessage("§eToo many arguments! §cUse §6/cmv <item> [<page>]");
                 }
+            } else {
+                p.sendMessage("§eYou don't have the permissions to use the Custom Model Viewer");
             }
         }
 
@@ -117,20 +119,12 @@ public class CMDcmv implements TabExecutor {
     private void GetItemFrame(Player p, boolean glowing){
         if(p.hasPermission("custommodelviewer.*") || p.hasPermission("custommodelviewer.itemframe")) {
             if(glowing){
-                if(p.hasPermission("custommodelviewer.*") || p.hasPermission("custommodelviewer.itemframe")) {
-                    //p.getInventory().addItem(new ItemBuilder(Material.GLOW_ITEM_FRAME).setInvisible().build());
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "give " + p.getName() + " glow_item_frame{EntityTag:{Invisible:1b}}");
-                } else {
-                    p.sendMessage("§cYou don't have the permission to get invisible Itemframes");
-                }
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "give " + p.getName() + " glow_item_frame{EntityTag:{Invisible:1b}}");
             } else {
-                if(p.hasPermission("custommodelviewer.*") || p.hasPermission("custommodelviewer.itemframe")) {
-                    //p.getInventory().addItem(new ItemBuilder(Material.ITEM_FRAME).setInvisible().build());
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "give " + p.getName() + " item_frame{EntityTag:{Invisible:1b}}");
-                } else {
-                    p.sendMessage("§cYou don't have the permission to get invisible Itemframes");
-                }
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "give " + p.getName() + " item_frame{EntityTag:{Invisible:1b}}");
             }
+        } else {
+            p.sendMessage("§cYou don't have the permission to get invisible Itemframes");
         }
     }
 }
