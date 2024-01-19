@@ -18,6 +18,15 @@ public class InvListener implements Listener {
     @EventHandler
     public void onINVclick(InventoryClickEvent e) {
 
+        //Check if correct menu:
+        String InvName = ChatColor.stripColor(e.getView().getTitle());
+        if (!InvName.startsWith("Custom Model Viewer")
+                || e.getClickedInventory() == null
+                || e.getClickedInventory().getType() == InventoryType.PLAYER
+                || e.getCurrentItem() == null) {
+            return;
+        }
+
         Viewer viewer = new Viewer();
 
         int itemsPerPage = Settings.itemsperpage;
@@ -27,16 +36,7 @@ public class InvListener implements Listener {
         String cleanedTitle = invTitle.substring(invTitle.length()-4).replaceAll("\\D", "");
         int page = Integer.parseInt(cleanedTitle);
 
-                Player p = (Player) e.getWhoClicked();
-        String InvName = ChatColor.stripColor(e.getView().getTitle());
-
-        //Check if correct menu:
-        if (!InvName.startsWith("Custom Model Viewer")
-                || e.getClickedInventory() == null
-                || e.getClickedInventory().getType() == InventoryType.PLAYER
-                || e.getCurrentItem() == null) {
-            return;
-        }
+        Player p = (Player) e.getWhoClicked();
 
         if (e.getSlot() == itemsPerPage + 3) {
             //Page-Buttons Previous
